@@ -1,5 +1,7 @@
 from PIL import Image
 
+file_path = 'cwk1-images/hshex/spectrum.hshex'
+file_path = 'cwk1-images/hs16/spectrum.hs16'
 file_path = 'cwk1-images/hs8/spectrum.hs8'
 
 # Read image data
@@ -13,8 +15,8 @@ width = int(words[1])
 height = int(words[2])
 pixels = words[3:]
 if (img_format == "HS8" or img_format == "HS16"):
-    pixels = pixels[0]
-    print((pixels[0] << 8) | pixels[1])
+    # pixels = pixels[0]
+    pixels = [item for sublist in pixels for item in sublist]
 
 # Get the RGB colour values in (255,255,255) format
 def get_colour_values(pixels):
@@ -29,7 +31,7 @@ def get_colour_values(pixels):
 # Setup the image and pixel data
 image = Image.new('RGB', (width, height), (0, 0, 0))
 rgb_values = get_colour_values(pixels)
-print(rgb_values)
+print(len(rgb_values))
 pixel_rows = [rgb_values[i*width:(i+1)*width] for i in range(height)]
 
 # Put pixel data into the image en masse
