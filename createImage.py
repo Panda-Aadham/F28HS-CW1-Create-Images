@@ -1,6 +1,12 @@
+import sys
 from PIL import Image
 
-file_path = 'cwk1-images/hs16/music.hs16'
+# Source file and output
+if (len(sys.argv) != 3):
+    print("Provide command line arguments: createImage.py INPUTFILE OUTPUTFILE")
+    sys.exit(1)
+file_path = sys.argv[1]
+file_out = sys.argv[2]
 
 # Read image data
 with open(file_path, 'rb') as file:
@@ -34,4 +40,4 @@ pixel_rows = [rgb_values[i*width:(i+1)*width] for i in range(height)]
 image.putdata([pixel for row in pixel_rows for pixel in row])
 
 # Save the image to a file
-image.save('output_image.png')
+image.save(file_out)
